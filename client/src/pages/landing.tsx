@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { updatePageSEO, SEO_CONFIG } from "@/lib/seo";
 import { 
   Brain, Shield, ArrowRight, CheckCircle, Clock, Lock, Zap, 
   FileText, Users, Sparkles, Moon, Sun, ExternalLink, Star
@@ -9,6 +10,11 @@ import { useTheme } from "@/components/ThemeProvider";
 
 export default function Landing() {
   const { theme, toggleTheme } = useTheme();
+
+  // Update SEO for homepage
+  useEffect(() => {
+    updatePageSEO(SEO_CONFIG.homepage.title, SEO_CONFIG.homepage.description);
+  }, []);
 
   const tools = [
     {

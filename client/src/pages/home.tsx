@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { updatePageSEO, SEO_CONFIG } from "@/lib/seo";
 import { 
   Brain, Shield, Edit, FileText, ClipboardList, WandSparkles, Trash2, Copy, TriangleAlert, 
   LoaderPinwheel, Info, CheckCircle, Download, Settings, Moon, Sun, ThumbsUp, Calendar,
-  Type, List, AlignLeft
+  Type, List, AlignLeft, Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -168,22 +169,27 @@ export default function Home() {
     conversational: "Natural, easy-to-read language while maintaining professionalism"
   };
 
+  // Update SEO for this page
+  useEffect(() => {
+    updatePageSEO(SEO_CONFIG.therapistTool.title, SEO_CONFIG.therapistTool.description);
+  }, []);
+
   return (
     <div className="bg-background min-h-screen font-sans">
-      {/* Header Section */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      {/* Header */}
+      <header className="bg-card shadow-sm border-b border-border sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-primary text-primary-foreground p-2 rounded-lg">
-                <Brain className="h-6 w-6" />
-              </div>
-              <div>
-                <Link href="/" className="hover:opacity-80 transition-opacity">
-                  <h1 className="text-2xl font-bold text-foreground">Therapist AI</h1>
-                </Link>
-                <p className="text-sm text-muted-foreground">Professional Session Summarizer</p>
-              </div>
+              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <div className="bg-primary text-primary-foreground p-2 rounded-lg">
+                  <Brain className="h-6 w-6" />
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-foreground">ToolNest AI</h1>
+                  <p className="text-xs text-muted-foreground">Professional AI Tools</p>
+                </div>
+              </Link>
             </div>
             <div className="flex items-center space-x-4">
               <div className="hidden sm:flex items-center space-x-2 text-sm text-muted-foreground">
@@ -203,8 +209,40 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Hero Section */}
+      <section className="py-12 md:py-16 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center space-x-3 mb-6">
+            <div className="bg-primary/10 text-primary p-3 rounded-lg">
+              <Brain className="h-8 w-8" />
+            </div>
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground">
+              Therapist AI Session Summariser
+            </h1>
+          </div>
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            Transform your rough therapy session notes into professional clinical summaries and care plans. 
+            Our AI therapist tools help mental health professionals save time while maintaining HIPAA-compliant documentation standards.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>HIPAA-Compliant Design</span>
+            </div>
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>No Data Storage</span>
+            </div>
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <CheckCircle className="h-4 w-4 text-green-500" />
+              <span>Instant Export Options</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Privacy Notice */}
         <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-8">
           <div className="flex items-start space-x-3">
@@ -544,44 +582,230 @@ Example:
           </div>
         </div>
 
-        {/* Feature Information */}
-        <div className="mt-12 card-background rounded-xl shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center space-x-2">
-            <Info className="h-5 w-5 text-primary" />
-            <span>How It Works</span>
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
-            <div className="text-center">
-              <div className="bg-primary/10 text-primary w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Edit className="h-5 w-5" />
-              </div>
-              <h4 className="font-medium text-foreground mb-2">1. Input Notes</h4>
-              <p className="text-muted-foreground">Paste your rough session notes and select the desired tone for the summary.</p>
+        {/* Features Section */}
+        <section className="mt-16 py-16 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
+                Why Mental Health Professionals Choose Our Tool
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                This free therapist documentation app is specifically designed for therapy note generation, 
+                helping you maintain professional standards while saving valuable time.
+              </p>
             </div>
-            <div className="text-center">
-              <div className="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Brain className="h-5 w-5" />
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="bg-primary/10 text-primary w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">HIPAA Compliant</h3>
+                <p className="text-sm text-muted-foreground">Designed with healthcare privacy regulations in mind. No client data is ever stored or transmitted.</p>
               </div>
-              <h4 className="font-medium text-foreground mb-2">2. AI Processing</h4>
-              <p className="text-muted-foreground">Claude AI analyzes your notes and generates professional summaries and care plans.</p>
-            </div>
-            <div className="text-center">
-              <div className="bg-muted text-muted-foreground w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Copy className="h-5 w-5" />
+
+              <div className="text-center">
+                <div className="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Clock className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Save Time</h3>
+                <p className="text-sm text-muted-foreground">Transform 30 minutes of documentation into 5 minutes with AI-powered therapy note generation.</p>
               </div>
-              <h4 className="font-medium text-foreground mb-2">3. Copy & Use</h4>
-              <p className="text-muted-foreground">Copy the generated content directly to your clinical documentation system.</p>
+
+              <div className="text-center">
+                <div className="bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-400 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <FileText className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Professional Output</h3>
+                <p className="text-sm text-muted-foreground">Generate clinical-quality summaries with proper therapeutic language and care plan structures.</p>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Download className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Multiple Formats</h3>
+                <p className="text-sm text-muted-foreground">Export as PDF, TXT, or copy directly to your EMR system with one click.</p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Use Cases Section */}
+        <section className="mt-16 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
+                Perfect for All Mental Health Professionals
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Whether you're in private practice or working in clinical settings, our mental health session summariser 
+                adapts to your documentation needs.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="card-background rounded-xl p-6">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Individual Therapists</h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Generate progress notes for insurance billing</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Create treatment plan updates efficiently</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Maintain consistent documentation standards</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Choose from clinical, formal, or conversational tones</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="card-background rounded-xl p-6">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Counselors & Psychologists</h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Structure session observations into professional reports</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Generate care plans with actionable next steps</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Include session date and therapist comment sections</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Export in formats compatible with EMR systems</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="card-background rounded-xl p-6">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Clinical Settings</h3>
+                <ul className="space-y-3 text-sm text-muted-foreground">
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Standardize documentation across team members</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Reduce administrative burden on clinical staff</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>Maintain compliance with healthcare documentation requirements</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span>No software installation or user accounts required</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="mt-16 py-16 bg-muted/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
+                How Our AI Therapist Tools Work
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Simple, secure, and specifically designed for therapy note generation and mental health documentation.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="bg-primary/10 text-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Edit className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4">1. Input Your Notes</h3>
+                <p className="text-muted-foreground">
+                  Paste your rough session notes, observations, and key points from the therapy session. 
+                  No formatting required - just your authentic notes.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Brain className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4">2. AI Analysis</h3>
+                <p className="text-muted-foreground">
+                  Claude AI processes your notes using mental health-specific prompts, maintaining therapeutic language 
+                  and professional documentation standards.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-muted text-muted-foreground w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Download className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-4">3. Professional Output</h3>
+                <p className="text-muted-foreground">
+                  Receive structured session summaries and care plans ready for your EMR system, 
+                  insurance documentation, or clinical records.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border mt-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground">
+      <footer className="bg-card border-t border-border py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <Link href="/" className="flex items-center space-x-2 mb-4 hover:opacity-80 transition-opacity">
+                <div className="bg-primary text-primary-foreground p-1.5 rounded">
+                  <Brain className="h-4 w-4" />
+                </div>
+                <span className="font-semibold text-foreground">ToolNest AI</span>
+              </Link>
+              <p className="text-sm text-muted-foreground">
+                Professional AI tools built for mental health professionals. This therapy note generator 
+                helps therapists save time while maintaining HIPAA-compliant documentation standards.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">Features</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>AI-powered session summaries</li>
+                <li>Professional care plan generation</li>
+                <li>HIPAA-compliant design</li>
+                <li>Multiple export formats</li>
+                <li>No data storage or tracking</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-foreground mb-3">For Mental Health Professionals</h4>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-2 py-1 bg-muted text-xs rounded">Therapists</span>
+                <span className="px-2 py-1 bg-muted text-xs rounded">Counselors</span>
+                <span className="px-2 py-1 bg-muted text-xs rounded">Psychologists</span>
+                <span className="px-2 py-1 bg-muted text-xs rounded">Clinical Social Workers</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between text-sm text-muted-foreground">
             <div className="flex items-center space-x-4">
-              <span>© 2025 Therapist AI</span>
+              <span>© 2025 ToolNest AI</span>
               <span className="text-muted-foreground/50">•</span>
               <span className="flex items-center space-x-1">
                 <Shield className="h-4 w-4 text-green-500" />
