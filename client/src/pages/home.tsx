@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { 
   Brain, Shield, Edit, FileText, ClipboardList, WandSparkles, Trash2, Copy, TriangleAlert, 
   LoaderPinwheel, Info, CheckCircle, Download, Settings, Moon, Sun, ThumbsUp, Calendar,
