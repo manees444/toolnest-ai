@@ -86,7 +86,12 @@ export default function Home() {
       return;
     }
 
-    generateMutation.mutate({ notes: notes.trim(), tone });
+    generateMutation.mutate({ 
+      sessionNotes: notes.trim(), 
+      tone, 
+      outputFormat, 
+      sessionDate: sessionDate || undefined 
+    });
   };
 
   const handleClear = () => {

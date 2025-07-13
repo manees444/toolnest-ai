@@ -10,6 +10,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (January 2025)
 
+✅ **API Endpoint Fixes for Production Deployment** (January 13, 2025)
+- Fixed JSON parsing error in both Replit and Vercel deployments
+- Updated API endpoint matching: frontend calls `/api/summary`, server responds on `/api/summary`
+- Corrected request schema to match frontend data structure (sessionNotes, tone, outputFormat, sessionDate)
+- Resolved "Function Runtimes must have a valid version" error by simplifying vercel.json
+- Added proper Vercel serverless function types and validation
+- Confirmed API working with Claude AI integration producing structured summaries
+
 ✅ **Platform Homepage & Tool Organization** (January 13, 2025)
 - Created professional homepage for ToolNest AI platform
 - Restructured routes: `/` for homepage, `/tools/therapist-ai` for tool
