@@ -40,11 +40,11 @@
    - Click "Import"
 
 3. **Configure Build Settings:**
-   - **Framework Preset:** Other
-   - **Build Command:** `npm run build`
-   - **Output Directory:** `dist` 
-   - **Install Command:** `npm install`
-   - **Development Command:** `npm run dev`
+   - **Framework Preset:** Vite
+   - **Build Command:** `npm run build` (should auto-detect)
+   - **Output Directory:** `dist` (should auto-detect)
+   - **Install Command:** `npm install` (should auto-detect)
+   - **Development Command:** `npm run dev` (should auto-detect)
 
 4. **Add Environment Variable:**
    - Before deploying, click "Environment Variables"
