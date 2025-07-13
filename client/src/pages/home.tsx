@@ -38,7 +38,7 @@ export default function Home() {
 
   const generateMutation = useMutation({
     mutationFn: async (data: GenerateSummaryRequest): Promise<SummaryResponse> => {
-      const response = await apiRequest("POST", "/api/generate-summary", data);
+      const response = await apiRequest("POST", "/api/summary", data);
       return response.json();
     },
     onSuccess: (data) => {

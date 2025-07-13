@@ -1,53 +1,44 @@
-# 🔧 URGENT FIX for Vercel Deployment Issue
+# 🔧 COMPLETE FIX for Vercel Deployment Issues
 
-## Problem
-Your Vercel deployment at https://toolnest-ai-woad.vercel.app/ is showing server code instead of the React UI.
+## ✅ FIXED: API Endpoint Error (404 NOT_FOUND)
 
-## Quick Fix (5 minutes)
+The 404 error when testing the therapist AI tool has been resolved. The issue was:
+- Frontend was calling: `/api/generate-summary` 
+- But Vercel API function was at: `/api/summary`
 
-### Step 1: Update Vercel Build Settings
-1. Go to your Vercel dashboard
-2. Click on your `toolnest-ai-woad` project
-3. Click "Settings" → "General"
-4. Scroll to "Build & Output Settings"
-5. **Change these settings:**
-   - **Output Directory:** `dist/public` (currently wrong)
-   - **Build Command:** `vite build`
-   - **Install Command:** `npm install`
+**Fixed:** Updated the frontend to use the correct `/api/summary` endpoint.
 
-### Step 2: Redeploy
-1. Go to "Deployments" tab
-2. Click the three dots "..." on your latest deployment
-3. Click "Redeploy"
-4. Wait 2-3 minutes
+## 📝 Next Steps for Deployment:
 
-## Why This Happened
-- Vercel was looking for files in `dist/` 
-- But Vite builds your React app to `dist/public/`
-- So Vercel served the server files instead of the UI
-
-## After Fix
-Your app will show:
-- ✅ Professional homepage at `/`
-- ✅ Therapist AI tool at `/tools/therapist-ai`
-- ✅ All features working properly
-
-## If Still Not Working
-Try this alternative:
-1. In Vercel settings, change **Output Directory** to just `dist`
-2. Then update the `vercel.json` file in your code to:
-```json
-{
-  "buildCommand": "vite build --outDir dist",
-  "outputDirectory": "dist",
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
-  ]
-}
+### 1. Push Updated Code to GitHub
+```bash
+git add .
+git commit -m "Fix API endpoint for Vercel deployment"
+git push origin main
 ```
-3. Push to GitHub and redeploy
 
-Your platform should be live and working within 5 minutes!
+### 2. Redeploy on Vercel
+1. Go to your Vercel dashboard
+2. Click on your `toolnest-ai-woad` project  
+3. Go to "Deployments" tab
+4. Click "Redeploy" on the latest deployment
+5. Wait 2-3 minutes
+
+### 3. Test Your Live App
+Visit: https://toolnest-ai-woad.vercel.app/
+
+✅ **Homepage** (`/`) - Tool showcase and navigation
+✅ **Therapist AI** (`/tools/therapist-ai`) - Working summary generator
+✅ **API** (`/api/summary`) - Claude AI integration
+
+## Environment Variables Check
+Make sure you have set in Vercel:
+- `ANTHROPIC_API_KEY` = your Claude API key
+
+## Current Configuration:
+- **Build Command:** `vite build`
+- **Output Directory:** `dist/public`
+- **API Function:** `api/summary.ts` (Node.js 18.x)
+- **Frontend Route:** `/api/summary` ✅
+
+Your AI tools platform should be fully functional after this deployment!
