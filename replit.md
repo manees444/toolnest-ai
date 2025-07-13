@@ -8,6 +8,20 @@ This is a modern, stateless web application designed for independent therapists 
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (January 2025)
+
+✅ **Enhanced MVP with Professional Features** (January 13, 2025)
+- Added dark mode toggle with persistent theme storage
+- Implemented tone description tooltips and enhanced UX
+- Added export functionality (PDF, TXT, Copy All)
+- Integrated word/character counters for input management
+- Created output customization settings (paragraph vs bullet format)
+- Added session date input for professional documentation
+- Implemented feedback collection system (local, no storage)
+- Enhanced mobile responsiveness with sticky buttons
+- Added therapist comments placeholder in care plan output
+- Improved dark mode support throughout the application
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -41,7 +55,9 @@ Preferred communication style: Simple, everyday language.
 ### UI Component System
 - **Base Components**: Located in `client/src/components/ui/`
 - **Design System**: Built on Radix UI primitives with Tailwind styling
-- **Theme**: Neutral color palette with CSS custom properties for theming
+- **Theme**: Full dark/light mode support with persistent storage
+- **Custom Components**: InfoTooltip, ThemeProvider for enhanced UX
+- **Mobile-First**: Responsive design with optimized mobile interactions
 
 ### API Integration
 - **Claude AI**: Uses latest Claude model (`claude-sonnet-4-20250514`)
@@ -50,12 +66,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Data Flow
 
-1. **User Input**: Therapist enters session notes and selects tone preference
-2. **Validation**: Client-side and server-side validation using Zod schemas
-3. **AI Processing**: Notes sent to Claude API with tone-specific prompts
-4. **Response Handling**: Structured response with summary and care plan sections
-5. **UI Updates**: Real-time loading states and toast notifications
-6. **Copy Functionality**: Easy copying of generated content to clipboard
+1. **User Input**: Therapist enters session notes, selects tone, and configures output settings
+2. **Settings Management**: Optional session date, output format (paragraph/bullet), and customization
+3. **Validation**: Client-side and server-side validation using Zod schemas
+4. **AI Processing**: Notes sent to Claude API with tone-specific prompts and formatting preferences
+5. **Response Handling**: Structured response with summary and care plan sections, formatted per user preference
+6. **Export Options**: Multiple export formats (TXT, PDF, Copy All) with session metadata
+7. **UI Updates**: Real-time loading states, toast notifications, and feedback collection
+8. **Professional Output**: Includes therapist comments placeholder and comprehensive documentation structure
 
 ## External Dependencies
 

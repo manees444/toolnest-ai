@@ -63,4 +63,18 @@
   .font-inter {
     font-family: 'Inter', system-ui, sans-serif;
   }
+  
+  /* Mobile-first responsive utilities */
+  .mobile-sticky-button {
+    @apply fixed bottom-4 left-4 right-4 z-50 md:relative md:bottom-auto md:left-auto md:right-auto md:z-auto;
+  }
+  
+  /* Enhanced dark mode support */
+  .card-background {
+    @apply bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-700;
+  }
+  
+  .text-muted {
+    @apply text-slate-600 dark:text-gray-400;
+  }
 }
