@@ -178,7 +178,9 @@ export default function Home() {
                 <Brain className="h-6 w-6" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">Therapist AI</h1>
+                <Link href="/" className="hover:opacity-80 transition-opacity">
+                  <h1 className="text-2xl font-bold text-foreground">Therapist AI</h1>
+                </Link>
                 <p className="text-sm text-muted-foreground">Professional Session Summarizer</p>
               </div>
             </div>

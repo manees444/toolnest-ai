@@ -10,6 +10,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (January 2025)
 
+✅ **Platform Homepage & Tool Organization** (January 13, 2025)
+- Created professional homepage for ToolNest AI platform
+- Restructured routes: `/` for homepage, `/tools/therapist-ai` for tool
+- Added SEO-optimized content with target keywords for professional tools
+- Implemented tool showcase with "Live" and "Coming Soon" sections
+- Added comprehensive "How It Works" and "Why Choose Us" sections
+- Built extensible structure for future AI tools
+- Enhanced navigation between homepage and individual tools
+
 ✅ **Enhanced MVP with Professional Features** (January 13, 2025)
 - Added dark mode toggle with persistent theme storage
 - Implemented tone description tooltips and enhanced UX
