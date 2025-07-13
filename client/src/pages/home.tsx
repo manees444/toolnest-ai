@@ -18,7 +18,7 @@ import { InfoTooltip } from "@/components/ui/info-tooltip";
 import { useTheme } from "@/components/ThemeProvider";
 import { downloadAsTxt, downloadAsPdf, copyAllToClipboard } from "@/lib/exportUtils";
 import type { GenerateSummaryRequest, SummaryResponse } from "@shared/schema";
-import { track } from '@vercel/analytics';
+// Remove direct track import to avoid hook issues
 
 export default function Home() {
   const [notes, setNotes] = useState("");
@@ -57,14 +57,16 @@ export default function Home() {
       setShowFeedback(true);
       
       // Track successful summary generation
-      track('summary_generated', {
-        tone: tone,
-        outputFormat: outputFormat,
-        notesLength: notes.length,
-        summaryLength: processedSummary.length,
-        carePlanLength: processedCarePlan.length,
-        sessionDate: sessionDate || null
-      });
+      if (typeof window !== 'undefined' && window.va) {
+        window.va.track('summary_generated', {
+          tone: tone,
+          outputFormat: outputFormat,
+          notesLength: notes.length,
+          summaryLength: processedSummary.length,
+          carePlanLength: processedCarePlan.length,
+          sessionDate: sessionDate || null
+        });
+      }
       
       toast({
         title: "Summary Generated",
@@ -170,15 +172,17 @@ export default function Home() {
   const handleFeedbackSubmit = () => {
     if (feedback.trim()) {
       // Send feedback to Vercel Analytics
-      track('therapist_tool_feedback', {
-        feedback: feedback.trim(),
-        tone: tone,
-        outputFormat: outputFormat,
-        timestamp: new Date().toISOString(),
-        sessionDate: sessionDate || null,
-        summaryLength: summary.length,
-        carePlanLength: carePlan.length
-      });
+      if (typeof window !== 'undefined' && window.va) {
+        window.va.track('therapist_tool_feedback', {
+          feedback: feedback.trim(),
+          tone: tone,
+          outputFormat: outputFormat,
+          timestamp: new Date().toISOString(),
+          sessionDate: sessionDate || null,
+          summaryLength: summary.length,
+          carePlanLength: carePlan.length
+        });
+      }
       
       // Also log to server for additional tracking
       fetch('/api/feedback', {
