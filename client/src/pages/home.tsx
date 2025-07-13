@@ -18,6 +18,7 @@ import { InfoTooltip } from "@/components/ui/info-tooltip";
 import { useTheme } from "@/components/ThemeProvider";
 import { downloadAsTxt, downloadAsPdf, copyAllToClipboard } from "@/lib/exportUtils";
 import type { GenerateSummaryRequest, SummaryResponse } from "@shared/schema";
+import { track } from '@vercel/analytics';
 
 export default function Home() {
   const [notes, setNotes] = useState("");
@@ -54,6 +55,17 @@ export default function Home() {
       setSummary(processedSummary);
       setCarePlan(processedCarePlan);
       setShowFeedback(true);
+      
+      // Track successful summary generation
+      track('summary_generated', {
+        tone: tone,
+        outputFormat: outputFormat,
+        notesLength: notes.length,
+        summaryLength: processedSummary.length,
+        carePlanLength: processedCarePlan.length,
+        sessionDate: sessionDate || null
+      });
+      
       toast({
         title: "Summary Generated",
         description: "Professional session summary and care plan have been created.",
@@ -157,9 +169,34 @@ export default function Home() {
 
   const handleFeedbackSubmit = () => {
     if (feedback.trim()) {
-      // In a real app, this would send to analytics
-      console.log("User feedback:", feedback);
+      // Send feedback to Vercel Analytics
+      track('therapist_tool_feedback', {
+        feedback: feedback.trim(),
+        tone: tone,
+        outputFormat: outputFormat,
+        timestamp: new Date().toISOString(),
+        sessionDate: sessionDate || null,
+        summaryLength: summary.length,
+        carePlanLength: carePlan.length
+      });
+      
+      // Also log to server for additional tracking
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'therapist_tool_feedback',
+          feedback: feedback.trim(),
+          metadata: {
+            tone,
+            outputFormat,
+            sessionDate: sessionDate || null,
+            timestamp: new Date().toISOString()
+          }
+        })
+      }).catch(console.error);
     }
+    
     toast({
       title: "Thank You!",
       description: "Your feedback helps us improve the tool.",

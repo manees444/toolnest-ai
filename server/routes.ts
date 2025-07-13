@@ -93,6 +93,26 @@ CARE PLAN & NEXT STEPS:
     }
   });
 
+  // Feedback collection endpoint
+  app.post("/api/feedback", async (req, res) => {
+    try {
+      const { type, feedback, metadata } = req.body;
+      
+      // Log feedback to console for now (you can extend this to save to database)
+      console.log("=== USER FEEDBACK RECEIVED ===");
+      console.log("Type:", type);
+      console.log("Feedback:", feedback);
+      console.log("Metadata:", JSON.stringify(metadata, null, 2));
+      console.log("Timestamp:", new Date().toISOString());
+      console.log("==============================");
+      
+      res.json({ success: true, message: "Feedback received" });
+    } catch (error) {
+      console.error("Error processing feedback:", error);
+      res.status(500).json({ error: "Failed to process feedback" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
