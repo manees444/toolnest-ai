@@ -15,7 +15,7 @@ const anthropic = new Anthropic({
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Generate session summary endpoint
-  app.post("/api/generate-summary", async (req, res) => {
+  app.post("/api/summary", async (req, res) => {
     try {
       // Validate request body
       const validationResult = generateSummarySchema.safeParse(req.body);
@@ -26,7 +26,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      const { notes, tone } = validationResult.data;
+      const { sessionNotes, tone, outputFormat, sessionDate } = validationResult.data;
 
       // Construct the prompt based on tone
       const toneInstructions = {
@@ -49,7 +49,7 @@ Important guidelines:
 - Maintain client confidentiality (avoid specific personal details)
 
 Therapist Notes:
-${notes}
+${sessionNotes}
 
 Please provide your response in the following format:
 

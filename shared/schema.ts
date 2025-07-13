@@ -2,8 +2,10 @@ import { z } from "zod";
 
 // Request schema for session summary generation
 export const generateSummarySchema = z.object({
-  notes: z.string().min(10, "Notes must be at least 10 characters long"),
+  sessionNotes: z.string().min(10, "Notes must be at least 10 characters long"),
   tone: z.enum(["formal", "clinical", "conversational"]),
+  outputFormat: z.enum(["paragraph", "bullet"]).optional(),
+  sessionDate: z.string().optional(),
 });
 
 // Response schema for generated summaries
