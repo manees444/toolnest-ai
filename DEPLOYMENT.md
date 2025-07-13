@@ -1,67 +1,60 @@
-# Deploying ToolNest AI to Vercel
+# Deploying ToolNest AI to Vercel - Quick Start Guide
 
 ## Prerequisites
 1. A GitHub account
-2. A Vercel account (free tier available)
+2. A Vercel account (free tier available at [vercel.com](https://vercel.com))
 3. Your Anthropic API key
 
-## Step 1: Prepare Your Repository
+## Quick Deployment Steps
 
-1. **Create a GitHub Repository**
+### Step 1: Push Your Code to GitHub
+
+1. **Create a new repository on GitHub:**
+   - Go to [github.com](https://github.com) → click "New repository"
+   - Name it: `toolnest-ai` (or your preferred name)
+   - Make it public
+   - Don't initialize with README (since you already have code)
+
+2. **Upload your code:**
    ```bash
-   # Initialize git in your project directory
+   # Initialize git (if not already done)
    git init
    git add .
    git commit -m "Initial commit: ToolNest AI platform"
    
-   # Create a new repository on GitHub and push
-   git remote add origin https://github.com/yourusername/toolnest-ai.git
+   # Connect to your GitHub repository
+   git remote add origin https://github.com/YOUR_USERNAME/toolnest-ai.git
    git branch -M main
    git push -u origin main
    ```
 
-## Step 2: Build Configuration
+### Step 2: Deploy with Vercel (Web Interface - Easiest Method)
 
-1. **Create `vercel.json` in your project root:**
-   ```json
-   {
-     "buildCommand": "npm run build",
-     "outputDirectory": "dist/public",
-     "devCommand": "npm run dev",
-     "installCommand": "npm install",
-     "functions": {
-       "dist/index.js": {
-         "runtime": "nodejs18.x"
-       }
-     },
-     "routes": [
-       {
-         "src": "/api/(.*)",
-         "dest": "/dist/index.js"
-       },
-       {
-         "src": "/(.*)",
-         "dest": "/dist/public/$1"
-       }
-     ],
-     "env": {
-       "NODE_ENV": "production"
-     }
-   }
-   ```
+1. **Sign up/Login to Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Continue with GitHub" to sign up/login
 
-2. **Update package.json scripts if needed:**
-   ```json
-   {
-     "scripts": {
-       "build": "npm run build:client && npm run build:server",
-       "build:client": "vite build --outDir dist/public",
-       "build:server": "esbuild server/index.ts --bundle --platform=node --outfile=dist/index.js --external:express",
-       "start": "node dist/index.js",
-       "dev": "NODE_ENV=development tsx server/index.ts"
-     }
-   }
-   ```
+2. **Import Your Project:**
+   - Click "New Project" on Vercel dashboard
+   - Import your `toolnest-ai` repository from GitHub
+   - Click "Import"
+
+3. **Configure Build Settings:**
+   - **Framework Preset:** Other
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist` 
+   - **Install Command:** `npm install`
+   - **Development Command:** `npm run dev`
+
+4. **Add Environment Variable:**
+   - Before deploying, click "Environment Variables"
+   - Add: `ANTHROPIC_API_KEY` = `your_api_key_here`
+   - Select: Production, Preview, Development
+
+5. **Deploy:**
+   - Click "Deploy"
+   - Wait for build to complete (2-3 minutes)
+   - Your app will be live at: `https://your-project-name.vercel.app`
 
 ## Step 3: Deploy to Vercel
 
