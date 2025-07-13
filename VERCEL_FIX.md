@@ -1,44 +1,53 @@
 # 🔧 COMPLETE FIX for Vercel Deployment Issues
 
-## ✅ FIXED: API Endpoint Error (404 NOT_FOUND)
+## ✅ FIXED: Runtime Version Error
 
-The 404 error when testing the therapist AI tool has been resolved. The issue was:
-- Frontend was calling: `/api/generate-summary` 
-- But Vercel API function was at: `/api/summary`
+**Error:** "Function Runtimes must have a valid version, for example `now-php@1.0.0`"
 
-**Fixed:** Updated the frontend to use the correct `/api/summary` endpoint.
+**Root Cause:** Invalid runtime configuration in `vercel.json`
 
-## 📝 Next Steps for Deployment:
+**Solutions Applied:**
+1. ✅ Removed invalid runtime configuration from `vercel.json`
+2. ✅ Fixed API endpoint mismatch (`/api/generate-summary` → `/api/summary`)
+3. ✅ Simplified schema validation for Vercel compatibility
+4. ✅ Added proper `@vercel/node` types
 
-### 1. Push Updated Code to GitHub
-```bash
-git add .
-git commit -m "Fix API endpoint for Vercel deployment"
-git push origin main
+## 📝 Current Configuration:
+
+**vercel.json** (Simplified):
+```json
+{
+  "buildCommand": "vite build",
+  "outputDirectory": "dist/public",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev"
+}
 ```
 
+**API Function:** `api/summary.ts` with proper Vercel types
+
+## 🚀 Deployment Steps:
+
+### 1. Download and Upload to GitHub
+Since git push is timing out:
+1. **Download your Replit project**
+2. **Extract and replace files** in your GitHub repository
+3. **Commit changes:** "Fix Vercel deployment configuration and API endpoints"
+
 ### 2. Redeploy on Vercel
-1. Go to your Vercel dashboard
-2. Click on your `toolnest-ai-woad` project  
-3. Go to "Deployments" tab
-4. Click "Redeploy" on the latest deployment
-5. Wait 2-3 minutes
+1. Go to Vercel dashboard → `toolnest-ai-woad` project
+2. Click "Deployments" → "Redeploy"
+3. Wait 2-3 minutes
 
 ### 3. Test Your Live App
 Visit: https://toolnest-ai-woad.vercel.app/
 
-✅ **Homepage** (`/`) - Tool showcase and navigation
-✅ **Therapist AI** (`/tools/therapist-ai`) - Working summary generator
+✅ **Homepage** (`/`) - Tool showcase
+✅ **Therapist AI** (`/tools/therapist-ai`) - Summary generator  
 ✅ **API** (`/api/summary`) - Claude AI integration
 
-## Environment Variables Check
-Make sure you have set in Vercel:
+## Environment Variables
+Ensure you have in Vercel:
 - `ANTHROPIC_API_KEY` = your Claude API key
 
-## Current Configuration:
-- **Build Command:** `vite build`
-- **Output Directory:** `dist/public`
-- **API Function:** `api/summary.ts` (Node.js 18.x)
-- **Frontend Route:** `/api/summary` ✅
-
-Your AI tools platform should be fully functional after this deployment!
+**Your AI tools platform will be fully functional after this deployment!**

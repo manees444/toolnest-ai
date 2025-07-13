@@ -1,6 +1,18 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Anthropic from '@anthropic-ai/sdk';
-import { generateSummarySchema } from '../shared/schema';
+
+// Simplified schema validation for Vercel
+const validateRequest = (data: any) => {
+  if (!data.sessionNotes || typeof data.sessionNotes !== 'string') {
+    throw new Error('sessionNotes is required');
+  }
+  return {
+    sessionNotes: data.sessionNotes,
+    tone: data.tone || 'formal',
+    outputFormat: data.outputFormat || 'paragraph',
+    sessionDate: data.sessionDate || ''
+  };
+};
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -25,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const body = generateSummarySchema.parse(req.body);
+    const body = validateRequest(req.body);
     
     // Create tone-specific prompt
     let toneInstruction = "";
