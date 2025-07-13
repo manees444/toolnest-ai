@@ -1,0 +1,108 @@
+
+📝 Product Requirements Document (PRD)
+
+Project Name: Therapist Session Summariser AI Tool
+
+🎯 Objective:
+Build a modern, minimal MVP web app where independent therapists can paste rough notes after a session and generate a professionally written session summary and care plan using Claude API.
+
+The tool must:
+- Be easy to edit, using only HTML/CSS on frontend.
+- Have a clean, responsive design (mobile-friendly).
+- Use Claude API on the backend (via Node.js or Python).
+- Not store any user data (stateless, privacy-safe).
+
+🧑‍💼 Target User:
+- Freelance therapists, counsellors, or psychologists.
+- Need quick help writing session summaries and next steps after client sessions.
+
+🔧 Features and Functionality
+
+✅ MVP Scope
+
+1. Input Section:
+- Textarea for therapists to paste rough notes.
+- Dropdown to choose tone:
+  - Formal
+  - Clinical
+  - Conversational
+
+2. Buttons:
+- “Generate Summary” — triggers Claude API.
+- “Clear” — clears input and output fields.
+
+3. Output Section:
+- Session Summary Output Box
+- Care Plan / Next Steps Output Box
+- “Copy” buttons for each output box
+
+4. Styling and UX:
+- Minimal modern UI (Google Fonts, soft colours, subtle shadows).
+- Responsive layout (works on desktop + mobile).
+- Highlight ethical/privacy notice: "Please avoid entering client names or private data."
+
+🧱 Tech Stack
+
+Frontend: HTML, CSS (no JS frameworks)
+Backend: Node.js or Python (simple API endpoint)
+AI Integration: Claude API (Anthropic's Claude v3 or v2)
+Hosting: Replit
+
+⚙️ Claude API Integration
+
+Prompt Template Example (backend side):
+
+You are a helpful mental health assistant. Based on the therapist’s notes below, generate:
+1. A clear, concise session summary (2-3 short paragraphs)
+2. A brief care plan or next steps for the next session
+
+Use a [TONE] tone.
+Only use the information provided. Avoid adding assumptions.
+
+Therapist Notes:
+[NOTES]
+
+Frontend will send:
+- Notes (user input)
+- Tone (selected option)
+
+Backend will format the prompt and send it to Claude API, then return:
+- summary
+- care_plan
+
+📦 Deliverables
+
+1. Frontend (HTML/CSS)
+   - index.html: Clean UI with all fields
+   - style.css: Modern styling
+   - Clearly commented HTML for easy editing by non-coders
+
+2. Backend
+   - server.js or app.py (Node or Python backend)
+   - Claude API request using POST
+   - CORS enabled so frontend and backend connect easily
+
+3. Claude API Key Placeholder
+   - Use .env to store API key securely
+   - Instructions on where to paste the Claude API key
+
+4. Deployment
+   - Fully working project on Replit
+   - One-click “Run” to launch frontend + backend
+
+🛡️ Non-Functional Requirements
+- Privacy-focused: No database, no analytics, no tracking.
+- Simple code structure: So a beginner in HTML/CSS can change text, colours, layout.
+- Modular backend: Easy to update the AI prompt in one place.
+
+💡 Future Ideas (Not in MVP)
+- Voice-to-text for notes
+- PDF export
+- Save sessions locally
+- Therapist login system
+
+📎 Notes for Replit Agent
+- Keep JS minimal, only where needed (e.g. for copy buttons or fetch calls).
+- Use Claude API documentation (https://docs.anthropic.com) to implement API call.
+- Separate frontend and backend in folders if needed.
+- Add clear comments in code for the founder (non-technical).
